@@ -1,0 +1,72 @@
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Windows
+
+local Window =
+    Rayfield:CreateWindow(
+    {
+        Name = "💵 Resource Saver Hub 💵 | By Stinkiplier",
+        LoadingTitle = "💵 Resource Saver Hub 💵",
+        LoadingSubtitle = "by Stinkiplier",
+        ConfigurationSaving = {
+            Enabled = false,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "Big Hub"
+        },
+        Discord = {
+            Enabled = false,
+            Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+        KeySystem = false, -- Set this to true to use our key system
+        KeySettings = {
+            Title = "Hoomp Hub | Key",
+            Subtitle = "",
+            Note = "https://pastebin.com/raw/SHzuKEzD",
+            FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+            SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+            GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+            Key = {"https://pastebin.com/raw/SHzuKEzD"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+        }
+    }
+)
+-- Tabs
+local HomeTab = Window:CreateTab("📟 Home", nil) -- Title, Image
+
+-- FPS
+
+local Slider =
+    HomeTab:CreateSlider(
+    {
+        Name = "FPS Cap",
+        Range = {1, 120},
+        Increment = 1,
+        Suffix = "FPS",
+        CurrentValue = 60,
+        Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Value1)
+            setfpscap(Value1)
+            print(Value1 .. " FPS Cap")
+            -- The variable (Value) is a number which correlates to the value the slider is currently at
+        end
+    }
+)
+
+-- CPU Saver
+
+local Toggle =
+    HomeTab:CreateToggle(
+    {
+        Name = "Cpu Saver",
+        CurrentValue = true,
+        Flag = "Toggle1",
+        Callback = function(Value2)
+            game:GetService("RunService"):Set3dRenderingEnabled(Value2)
+            if Value2 then
+                print("CPU Saver Off")
+            else
+                print("CPU Saver On")
+            end
+        end
+    }
+)
