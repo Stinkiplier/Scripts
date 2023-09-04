@@ -1,0 +1,194 @@
+local dropPrefix = "Drop"
+local namefr = game.Players.LocalPlayer.Character.Name
+local ownedTycoons = {}
+for i = 1, 6 do
+    local tycoonOwner = tostring(workspace.Tycoons["Tycoon" .. i].Owner.value)
+    if tycoonOwner == namefr then
+        table.insert(ownedTycoons, "Tycoon" .. i)
+    end
+end
+for _, tycoonName in ipairs(ownedTycoons) do
+    workspace.Tycoons[tycoonName].OtherButtons.Merge.ActivePart.CanCollide = false
+    workspace.Tycoons[tycoonName].OtherButtons.Deposit.ActivePart.CanCollide = false
+    workspace.Tycoons[tycoonName].BuyItemButtons.Item1Button.ActivePart.CanCollide = false
+    workspace.Tycoons[tycoonName].BuyItemButtons.Item2Button.ActivePart.CanCollide = false
+    workspace.Tycoons[tycoonName].BuyItemButtons.Item3Button.ActivePart.CanCollide = false
+    workspace.Tycoons[tycoonName].OtherButtons.UpgradeSell.ActivePart.CanCollide = false
+end
+getgenv().togglename = false
+getgenv().togglenameez = false
+getgenv().togglenameezz = false
+getgenv().togglenameez1 = false
+getgenv().togglenameez2 = false
+getgenv().togglenameez3 = false
+getgenv().togglenameeza = false
+for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+end
+local mouse = game.Players.LocalPlayer:GetMouse()
+local HelloLib =
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/notaskidguylikeothers/microboba/main/lol%20amaziing")))(
+
+)
+local Window = HelloLib:MakeWindow({Name = "Merge to Get Rich Tycoon | Stinkiplier"})
+local ez =
+    Window:MakeTab(
+    {
+        Name = "AutoFarm",
+        Icon = "rbxassetid://14563131040"
+     --13696362002
+    }
+)
+ez:AddLabel("AutoFarm")
+ez:AddToggle(
+    {
+        Name = "Auto Collect",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglename = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglename do
+                    for i = 1, 19 do
+                        local dropPart = workspace.Tycoons[tycoonName].CurrentDrops:FindFirstChild(dropPrefix .. i)
+                        if dropPart then
+                            local dropBound = dropPart.Bound
+                            --  print("Interacting with:", dropPart.Name)
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, dropBound, 0)
+                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, dropBound, 1)
+                        end
+                    end
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddToggle(
+    {
+        Name = "Auto Deposit",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameez = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameez do
+                    workspace.Tycoons[tycoonName].OtherButtons.Deposit.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddToggle(
+    {
+        Name = "Auto Merge",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameezz = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameezz do
+                    --firetouchinterest(game.Players.LocalPlayer.Character.RightFoot, workspace.Tycoons.Tycoon1.OtherButtons.Deposit.ActivePart, 1)
+                    workspace.Tycoons[tycoonName].OtherButtons.Merge.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddLabel("Auto Upgrade")
+ez:AddToggle(
+    {
+        Name = "Auto Buy +1",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameez1 = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameez1 do --workspace.Tycoons.Tycoon3.BuyItemButtons.Item1Button.ActivePart
+                    workspace.Tycoons[tycoonName].BuyItemButtons.Item1Button.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddToggle(
+    {
+        Name = "Auto Buy +20",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameez3 = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameez3 do
+                    workspace.Tycoons[tycoonName].BuyItemButtons.Item2Button.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddToggle(
+    {
+        Name = "Auto Buy +100",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameez2 = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameez2 do
+                    workspace.Tycoons[tycoonName].BuyItemButtons.Item3Button.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+ez:AddToggle(
+    {
+        Name = "Auto Upgrade Sell Rate",
+        Default = false,
+        Callback = function(bool)
+            getgenv().togglenameeza = bool
+            for _, tycoonName in ipairs(ownedTycoons) do
+                while togglenameeza do --workspace.Tycoons.Tycoon3.OtherButtons.UpgradeSell.ActivePart
+                    workspace.Tycoons[tycoonName].OtherButtons.UpgradeSell.ActivePart.CFrame =
+                        game.Players.LocalPlayer.Character.RightFoot.CFrame +
+                        Vector3.new(
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000,
+                            math.random(5000000, 10000000) / 10000000
+                        )
+                    game:GetService("RunService").Heartbeat:Wait()
+                end
+            end
+        end
+    }
+)
+HelloLib:Init()
