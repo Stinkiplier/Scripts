@@ -33,6 +33,7 @@ local Window =
 -- Tabs
 
 local HomeTab = Window:CreateTab("📟 Home", nil) -- Title, Image
+local PlayerTab = Window:CreateTab("🏃‍♂️ Player", nil) -- Title, Image
 
 --Console
 
@@ -86,18 +87,18 @@ local Toggle =
     }
 )
 
-local Button = HomeTab:CreateButton({
+local Button = PlayerTab:CreateButton({
     Name = "Kick Player",
     Callback = function()
         game.Players.LocalPlayer:Kick("Kicked by " .. game.Players.LocalPlayer.DisplayName)
     end,
  })
 
- local Label = HomeTab:CreateLabel("Messages")
+ local Label = PlayerTab:CreateLabel("Messages")
 
  local Text = ""
 
-local Input = HomeTab:CreateInput({
+local Input = PlayerTab:CreateInput({
     Name = "Message Text",
     PlaceholderText = "Text",
     RemoveTextAfterFocusLost = false,
@@ -106,7 +107,7 @@ local Input = HomeTab:CreateInput({
     end
 })
 
-local Button = HomeTab:CreateButton({
+local Button = PlayerTab:CreateButton({
     Name = "Say Message",
     Callback = function()
         local message = Text
