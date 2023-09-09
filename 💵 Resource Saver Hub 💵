@@ -31,7 +31,22 @@ local Window =
     }
 )
 -- Tabs
+
 local HomeTab = Window:CreateTab("📟 Home", nil) -- Title, Image
+
+--Console
+
+
+local numLines = 100
+
+local Button = HomeTab:CreateButton({
+    Name = "Clear Console",
+    Callback = function()
+        for _ = 1, numLines do
+            print()
+        end
+    end,
+})
 
 -- FPS
 
@@ -70,3 +85,32 @@ local Toggle =
         end
     }
 )
+
+local Button = HomeTab:CreateButton({
+    Name = "Kick Player",
+    Callback = function()
+        game.Players.LocalPlayer:Kick("Kicked by " .. game.Players.LocalPlayer.DisplayName)
+    end,
+ })
+
+ local Label = HomeTab:CreateLabel("Messages")
+
+ local Text = ""
+
+local Input = HomeTab:CreateInput({
+    Name = "Message Text",
+    PlaceholderText = "Text",
+    RemoveTextAfterFocusLost = false,
+    Callback = function(inputText)
+        Text = inputText
+    end
+})
+
+local Button = HomeTab:CreateButton({
+    Name = "Say Message",
+    Callback = function()
+        local message = Text
+        game:GetService("Chat"):Chat(game.Players.LocalPlayer.Character, message)
+        print("Message sent | " .. Text)
+    end,
+})
