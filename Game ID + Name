@@ -1,0 +1,10 @@
+-- Gets the current place name and place id then prints it in the roblox console
+
+local function getName()
+    return game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+end
+
+local currentGameName = getName()
+
+print("Current game name | " .. currentGameName)
+print("Current game id | " .. game.PlaceId)
