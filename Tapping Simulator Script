@@ -1,0 +1,133 @@
+--tapping simulator
+
+if game.placeId == 9498006165 then
+
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Windows
+
+local Window =
+    Rayfield:CreateWindow(
+    {
+        Name = "👆 Tapping simulator| By Stinkiplier",
+        LoadingTitle = "👆 Tapping simulator",
+        LoadingSubtitle = "by Stinkiplier",
+        ConfigurationSaving = {
+            Enabled = false,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "Big Hub"
+        },
+        Discord = {
+            Enabled = false,
+            Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+        KeySystem = false, -- Set this to true to use our key system
+        KeySettings = {
+            Title = "👆 Tapping simulator | Key",
+            Subtitle = "",
+            Note = "https://pastebin.com/raw/SHzuKEzD",
+            FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+            SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+            GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+            Key = {"https://pastebin.com/raw/SHzuKEzD"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+        }
+    }
+)
+
+-- Functions
+
+function Tap()
+    while _G.Tap == true do
+        game:GetService("ReplicatedStorage").Events.Tap:FireServer("Main")
+        wait(.00000001)
+     end
+    end
+
+function Rebirth()
+    while _G.Rebirth == true do
+        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(1)
+        wait(.5)
+     end
+    end
+
+function Rebirth6()
+    while _G.Rebirth6 == true do
+        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(5)
+        wait(.5)
+        end
+     end
+
+function Rebirth11()
+    while _G.Rebirth11 == true do
+        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(10)
+        wait(.5)
+        end
+    end
+
+function Rebirth20()
+    while _G.Rebirth20 == true do
+        game:GetService("ReplicatedStorage").Events.Rebirth:FireServer(20)
+        wait(.5)
+        end
+    end
+
+-- Tabs
+
+local ClickTab = Window:CreateTab("👩‍🌾 Auto Farm", nil) 
+
+--ClickTab
+
+local Toggle = ClickTab:CreateToggle({
+    Name = "👆 Auto Tap",
+    CurrentValue = false,
+    Flag = "Tap", 
+    Callback = function(Value1)
+        _G.Tap = Value1
+        Tap()
+    end,
+ })
+
+ local Toggle = ClickTab:CreateToggle({
+    Name = "♻ Auto Rebirth 1",
+    CurrentValue = false,
+    Flag = "Rebirth", 
+    Callback = function(Value2)
+        _G.Rebirth = Value2
+        Rebirth()
+    end,
+ })
+
+ local Toggle = ClickTab:CreateToggle({
+    Name = "♻ Auto Rebirth 5",
+    CurrentValue = false,
+    Flag = "Rebirth6", 
+    Callback = function(Value6)
+        _G.Rebirth6 = Value6
+        Rebirth6()
+    end,
+ })
+
+ local Toggle = ClickTab:CreateToggle({
+    Name = "♻ Auto Rebirth 10",
+    CurrentValue = false,
+    Flag = "Rebirth11", 
+    Callback = function(Value11)
+        _G.Rebirth11 = Value11
+        Rebirth11()
+    end,
+ })
+
+ local Toggle = ClickTab:CreateToggle({
+    Name = "♻ Auto Rebirth 20",
+    CurrentValue = false,
+    Flag = "Rebirth20", 
+    Callback = function(Value20)
+        _G.Rebirth20 = Value20
+        Rebirth20()
+    end,
+ })
+
+else 
+    game.players.localPlayer:kick("Wrong Game")
+end
