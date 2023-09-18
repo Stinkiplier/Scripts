@@ -1,0 +1,36 @@
+-- Muscle Throw Script
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("💪 Muscle Throw") -- Creates the window
+
+local a = w:CreateFolder("Auto Collect") -- Creates the folder (you will put your buttons, etc. here)
+local b = w:CreateFolder("Player") -- Creates the folder (you will put your buttons, etc. here)
+
+local shared = setmetatable({}, { __index = _G }) -- Create a shared table to store variables
+
+shared.toggle = false -- Initialize toggle as false
+
+a:Toggle("Toggle", function(bool)
+    shared.toggle = bool -- Update the toggle variable
+end)
+
+-- Auto-collect function
+while true do
+    if shared.toggle then
+        local workspace = game:GetService("Workspace")
+        local dropsFolder = workspace:FindFirstChild("Drops")
+
+        if dropsFolder then
+            local newMaxActivationDistance = 1000
+            for _, child in pairs(dropsFolder:GetChildren()) do
+                local proximityPrompt = child:FindFirstChild("ProximityPrompt")
+                if proximityPrompt then
+                    proximityPrompt.MaxActivationDistance = newMaxActivationDistance
+                end
+            end
+        else
+            warn("The 'Drops' folder was not found in Workspace.")
+        end
+    end
+    wait(0.000001) -- Adjust the wait time as needed
+end
