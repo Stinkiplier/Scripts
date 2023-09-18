@@ -1,36 +1,65 @@
--- Muscle Throw Script
-local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local w = library:CreateWindow("💪 Muscle Throw") -- Creates the window
+local Window = Rayfield:CreateWindow({
+    Name = "Muscle Throw Script | Stinkiplier",
+    LoadingTitle = "Muscle Throw Script | Stinkiplier",
+    LoadingSubtitle = "by Stinkiplier",
+    ConfigurationSaving = {
+        Enabled = false,
+        FolderName = nil, -- Create a custom folder for your hub/game
+        FileName = "Big Hub"
+    },
+    Discord = {
+        Enabled = false,
+        Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+        RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = false, -- Set this to true to use our key system
+    KeySettings = {
+        Title = "Muscle Throw Script | Stinkiplier",
+        Subtitle = "Key System",
+        Note = "https://pastebin.com/raw/gBBDFpKG",
+        FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+        GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+        Key = {"https://pastebin.com/raw/gBBDFpKG"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+})
 
-local a = w:CreateFolder("Auto Collect") -- Creates the folder (you will put your buttons, etc. here)
-local b = w:CreateFolder("Player") -- Creates the folder (you will put your buttons, etc. here)
+-- Tabs
+local Tab = Window:CreateTab("💪 Muscle Throw") -- Title, Image
 
-local shared = setmetatable({}, { __index = _G }) -- Create a shared table to store variables
+-- Functions
+function Collect()
+    local workspace = game:GetService("Workspace")
+    local dropsFolder = workspace:FindFirstChild("Drops")
 
-shared.toggle = false -- Initialize toggle as false
-
-a:Toggle("Toggle", function(bool)
-    shared.toggle = bool -- Update the toggle variable
-end)
-
--- Auto-collect function
-while true do
-    if shared.toggle then
-        local workspace = game:GetService("Workspace")
-        local dropsFolder = workspace:FindFirstChild("Drops")
-
-        if dropsFolder then
-            local newMaxActivationDistance = 1000
-            for _, child in pairs(dropsFolder:GetChildren()) do
-                local proximityPrompt = child:FindFirstChild("ProximityPrompt")
-                if proximityPrompt then
-                    proximityPrompt.MaxActivationDistance = newMaxActivationDistance
-                end
+    if dropsFolder then
+        local newMaxActivationDistance = 1000
+        for _, child in pairs(dropsFolder:GetChildren()) do
+            local proximityPrompt = child:FindFirstChild("ProximityPrompt")
+            if proximityPrompt then
+                proximityPrompt.MaxActivationDistance = newMaxActivationDistance
             end
-        else
-            warn("The 'Drops' folder was not found in Workspace.")
         end
+    else
+        warn("The 'Drops' folder was not found in Workspace.")
     end
-    wait(0.000001) -- Adjust the wait time as needed
 end
+
+-- Buttons
+local Section = Tab:CreateSection("💵 Auto Collect")
+
+local Toggle = Tab:CreateToggle({
+    Name = "Auto Collect",
+    CurrentValue = false,
+    Callback = function(IsAutoCollect)
+        _G.Collect = IsAutoCollect
+        if IsAutoCollect then
+            while _G.Collect do
+                Collect() -- Call the function
+                wait(0.0000001) -- Wait for a very short time
+            end
+        end
+    end,
+})
