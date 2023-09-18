@@ -1,0 +1,63 @@
+--Bike Obby
+function CheckCurrentWorld(worldNumber)
+    if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") then
+        local screenGui = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("ScreenGui")
+        if screenGui then
+            local worldText = screenGui:FindFirstChild("World")
+            if worldText and worldText:IsA("TextLabel") then
+                if tonumber(worldText.Text:match("%d+")) == worldNumber then
+                    return "Correct"
+                else
+                    return "Wrong"
+                end
+            end
+        end
+    end
+    return "Not Found"
+end
+
+local currentWorld = tonumber(game.Players.LocalPlayer.PlayerGui.ScreenGui.World.Text:match("%d+"))
+
+function IsWorld1()
+    while true do
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame =
+            game.workspace.WorldMap.Checkpoints["51"].Hitbox.CFrame
+        wait(1)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame =
+            game.workspace.WorldMap.Checkpoints["99"].Hitbox.CFrame
+        wait(5)
+        game:GetService("ReplicatedStorage").RemoteEvents.ReportReset:FireServer()
+        wait(60)
+    end
+end
+
+function IsWorld2()
+    while true do
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame =
+            game.workspace.WorldMap.Checkpoints["51"].Hitbox.CFrame
+        wait(5)
+        game:GetService("ReplicatedStorage").RemoteEvents.ReportReset:FireServer()
+        wait(60)
+    end
+end
+
+function IsWorld3()
+    while true do
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame =
+            game.workspace.WorldMap.Checkpoints["51"].Hitbox.CFrame
+        wait(1)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame =
+            game.workspace.WorldMap.Checkpoints["70"].Hitbox.CFrame
+        wait(5)
+        game:GetService("ReplicatedStorage").RemoteEvents.ReportReset:FireServer()
+        wait(60)
+    end
+end
+
+if currentWorld == 1 then
+    IsWorld1()
+elseif currentWorld == 2 then
+    IsWorld2()
+elseif currentWorld == 3 then
+    IsWorld3()
+end
