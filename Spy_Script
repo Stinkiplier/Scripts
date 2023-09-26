@@ -1,4 +1,4 @@
---Spy
+-- Spy
 enabled = true
 spyOnMyself = false
 public = false
@@ -19,10 +19,10 @@ _G.chatSpyInstance = instance
 
 local function onChatted(p, msg)
     if _G.chatSpyInstance == instance then
-        if p == player and msg:lower():sub(1, 4) == "/spy" or "spy" then
+        if p == player and (msg:lower():sub(1, 4) == "/spy" or msg:lower() == "spy") then
             enabled = not enabled
             wait(0.3)
-            privateProperties.Text = "{SPY " .. (enabled and "EN" or "DIS") .. "ABLED}"
+            privateProperties.Text = "{Spy " .. (enabled and "En" or "Dis") .. "abled}"
             StarterGui:SetCore("ChatMakeSystemMessage", privateProperties)
         elseif enabled and (spyOnMyself == false or p ~= player) then
             msg = msg:gsub("[\n\r]", ''):gsub("\t", ' '):gsub("[ ]+", ' ')
@@ -36,9 +36,9 @@ local function onChatted(p, msg)
             conn:Disconnect()
             if hidden and enabled then
                 if public then
-                    saymsg:FireServer((publicItalics and "/me " or '') .. "{SPY} [" .. p.Name .. "]: " .. msg, "All")
+                    saymsg:FireServer((publicItalics and "/me " or '') .. "{SPY} [" .. p.DisplayName .. "]: " .. msg, "All")
                 else
-                    privateProperties.Text = "{SPY} [" .. p.Name .. "]: " .. msg
+                    privateProperties.Text = "{SPY} [" .. p.DisplayName .. "]: " .. msg
                     StarterGui:SetCore("ChatMakeSystemMessage", privateProperties)
                 end
             end
