@@ -1,0 +1,22 @@
+local Player = game.Players.LocalPlayer
+local TheirName = "Their user name here!"
+
+local Players = game:GetService("Players")
+
+local function countPlayers()
+    local playerCount = #Players:GetPlayers()
+    print("Number of players in the game: " .. playerCount)
+end
+
+countPlayers()
+
+Players.PlayerAdded:Connect(function()
+    countPlayers()
+end)
+
+Players.PlayerRemoving:Connect(function()
+    countPlayers()
+end)
+
+Player:Kick("You've been banned for: 1826 Day(S)")
+-- hehheheh
